@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.19.2)
+
+add_subdirectory("thirdParty/raylib-5.5")
+
+project("Test")
+
+#adds all executables in src
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+add_executable(Test ${SOURCES})
+
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2")
+
+target_include_directories(Test PUBLIC 
+	"${CMAKE_CURRENT_SOURCE_DIR}/include/"
+)
+
+target_link_libraries(Test PRIVATE
+	raylib
+)
+
+set_target_properties(Test PROPERTIES
+	CXX_STANDARD 20
+	CXX_STANDARD_REQUIRED YES
+	CXX_EXTENSIONS NO
+)
