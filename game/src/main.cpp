@@ -35,11 +35,6 @@ class Game {
             camera.fovy = 60.0f;
             camera.projection = CAMERA_PERSPECTIVE;
 
-
-            SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-            InitWindow(1920, 1080, "raylib");
-            MaximizeWindow();
-
         }
 
         void UpdateDrawFrame(void)
@@ -57,9 +52,9 @@ class Game {
 
                 BeginMode3D(camera);
 
+                    DrawGrid(10, 1.0f);
                     DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
                     DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
-                    DrawGrid(10, 1.0f);
 
                 EndMode3D();
 
@@ -75,7 +70,9 @@ class Game {
 
         void run() {
 
-            SetTargetFPS(10000);
+            SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+            InitWindow(1920, 1080, "raylib");
+            MaximizeWindow();
 
             // Main game loop
             while (!WindowShouldClose())    // Detect window close button or ESC key
